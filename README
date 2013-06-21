@@ -1,1 +1,8 @@
 This is an experiement provisioning Django 1.5.1 on Ubuntu 12.04 LTS
+
+I'm currently using CentOS 6.4 host with VirtualBox 4.1.2 and an Ubuntu Server guest installed with the Ubuntu Server i386 iso.
+The hostsfile assumes you can get to the VirtualBox guest at 127.0.0.1:2222
+
+If you'd like to try to use this, I recommend a 'grep -nri fdavis' from the root directory.
+You'll likely want to change every instance of fdavis, because that is not very likely to be the username you use everywhere! :P
+Patches to switch over to Vagrant are welcome! (I will do this if this project stays relavent to my work.)
