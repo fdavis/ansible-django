@@ -1,0 +1,12 @@
+---
+- name: get the django source
+  uri: url=https://www.djangoproject.com/download/1.5.1/tarball/ dest=/opt/django.tgz follow_redirects=yes creates=/opt/django.tgz
+
+- name: untar django
+  command: tar xf /opt/django.tgz -C /opt creates=/opt/Django-1.5.1
+
+- name: install it
+  command: chdir=/opt/Django-1.5.1 python setup.py install creates=/opt/Django-1.5.1/README.rst
+
+- name: print out the version
+  command: python -c "import django; print django.VERSION"
