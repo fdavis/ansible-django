@@ -1,0 +1,4 @@
+setup other account for machines to use READ ONLY
+snapshot VBox
+playbook to get django hello world setup
+

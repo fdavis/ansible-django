@@ -1,0 +1,6 @@
+---
+- hosts: django-servers
+  roles:
+    - role: django
+      tags:
+        - django
