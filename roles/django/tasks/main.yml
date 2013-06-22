@@ -38,5 +38,17 @@
   tags:
     - gitpull
 
+- name: setup django conf for nginx
+  copy: src=django dest=/etc/nginx/sites-available/django mode=0644 owner=root group=root
+  notify: service nginx start/enable
+
+- name: symlink from sites enabled
+  shell: ln -s ../sites-availble/django /etc/nginx/sites-enabled/django creates=/etc/nginx/sites-enabled/django
+  notify: service nginx start/enable
+
+- name: remove default enabled
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  notify: service nginx start/enable
+
 - name: print out some versions
   shell: python --version; python -c "import django; print django.VERSION"
