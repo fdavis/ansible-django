@@ -11,12 +11,6 @@
   command: chdir=/opt/Django-1.5.1 python setup.py install creates=/opt/Django-1.5.1/README.rst
   notify: service nginx start/enable
 
-#- name: upgrade
-#  command: apt-get upgrade -y
-
-#- name: update
-#  command: apt-get update -y
-
 - name: install deps
   apt: pkg=$item state=present
   with_items:
@@ -50,5 +44,3 @@
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: service nginx start/enable
 
-- name: print out some versions
-  shell: python --version; python -c "import django; print django.VERSION"
