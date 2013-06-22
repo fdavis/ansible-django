@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www
+	<Location "/">
+	    SetHandler python-program
+	    PythonHandler django.core.handlers.modpython
+	    SetEnv DJANGO_SETTINGS_MODULE mysite.settings
+	    PythonDebug Off
+	</Location>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>

@@ -1,2 +1,8 @@
-[django-servers]
+# specify vars at top of hostfile or in host_vars files
 ubuntu-server ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
+
+[django-servers]
+ubuntu-server
+
+[postgres-servers]
+ubuntu-server 
