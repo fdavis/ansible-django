@@ -17,12 +17,13 @@
 #- name: update
 #  command: apt-get update -y
 
-- name: install $items
+- name: install deps
   apt: pkg=$item state=present
   with_items:
     - python-psycopg2
     - python-pip
     - python-dev
+    - nginx
   notify: service nginx start/enable
   tags:
     - aptget
