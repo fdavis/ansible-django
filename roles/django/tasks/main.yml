@@ -37,10 +37,18 @@
   notify: service nginx start/enable
 
 - name: symlink from sites enabled
-  shell: ln -s ../sites-availble/django /etc/nginx/sites-enabled/django creates=/etc/nginx/sites-enabled/django
+  shell: ln -s ../sites-available/django /etc/nginx/sites-enabled/django creates=/etc/nginx/sites-enabled/django
   notify: service nginx start/enable
 
 - name: remove default enabled
   file: path=/etc/nginx/sites-enabled/default state=absent
   notify: service nginx start/enable
+
+- name: copy over uwsgi django.ini
+  copy: src=django.ini dest=/etc/nginx/django.ini
+  notify: service uwsgi start/enable
+
+- name: copy over uwsgi.conf
+  copy: src=uwsgi.conf dest=/etc/init/uwsgi.conf owner=root group=root mode=0644
+  notify: service uwsgi start/enable
 
