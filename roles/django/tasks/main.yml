@@ -28,7 +28,7 @@
 
 - name: get the webapp
   git: repo=git://github.com/fdavis/django-site.git force=yes dest=/opt/mysite
-  notify: service nginx start/enable
+  #notify: service uwsgi start/enable
   tags:
     - gitpull
 
