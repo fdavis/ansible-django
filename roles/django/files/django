@@ -1,8 +1,8 @@
 # nginx.conf
 upstream django {
     # connect to this socket
-    # server unix:///tmp/uwsgi.sock;    # for a file socket
-    server 127.0.0.1:8001;      # for a web port socket
+    server unix:///tmp/uwsgi.sock;    # for a file socket
+    # server 127.0.0.1:8001;      # for a web port socket
 }
 
 server {
