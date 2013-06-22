@@ -11,34 +11,31 @@
   command: chdir=/opt/Django-1.5.1 python setup.py install creates=/opt/Django-1.5.1/README.rst
   notify: service nginx start/enable
 
-- name: update
-  command: apt-get update -y
+#- name: upgrade
+#  command: apt-get upgrade -y
 
-- name: install python-psycopg2/nginx/mod_python
-  apt: pkg=python-psycopg2 state=present
+#- name: update
+#  command: apt-get update -y
+
+- name: install $items
+  apt: pkg=$item state=present
   with_items:
     - python-psycopg2
     - python-pip
+    - python-dev
   notify: service nginx start/enable
+  tags:
+    - aptget
 
 - name: install uwsgi
   pip: name=uwsgi state=present
-
-- name: symlink mod python
-  command: ln -s ../mods-available/python.load  /etc/nginx/mods-enabled/python.load creates=/etc/nginx/mods-enabled/python.load
   notify: service nginx start/enable
 
-- name: copy over django site conf
-  copy: src=django dest=/etc/nginx/sites-available/django owner=root group=root mode=0644
+- name: get the webapp
+  git: repo=git://github.com/fdavis/django-site.git force=yes dest=/opt/mysite
   notify: service nginx start/enable
-
-- name: symlink sites enabled
-  command: ln -s ../sites-available/django /etc/nginx/sites-enabled/000-django creates=/etc/nginx/sites-enabled/000-django
-  notify: service nginx start/enable
-
-- name: remove default site symlink
-  file: path=/etc/nginx/sites-enabled/000-default state=absent
-  notify: service nginx start/enable
+  tags:
+    - gitpull
 
 - name: print out some versions
   shell: python --version; python -c "import django; print django.VERSION"
