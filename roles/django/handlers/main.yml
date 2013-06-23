@@ -6,4 +6,4 @@
   service: name=uwsgi state=restarted enabled=yes
 
 - name: django syncdb
-  command: chdir=/opt/mysite/mysite python manage.py syncdb
+  command: chdir=/opt/mysite/mysite python manage.py syncdb --noinput
