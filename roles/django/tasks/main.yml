@@ -28,7 +28,9 @@
 
 - name: get the webapp
   git: repo=git://github.com/fdavis/django-site.git force=yes dest=/opt/mysite
-  notify: service uwsgi start/enable
+  notify: 
+    - service uwsgi start/enable
+    - django syncdb
   tags:
     - gitpull
 
